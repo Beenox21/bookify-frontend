@@ -19,9 +19,12 @@ function Navbar() {
                 </div>
 
                 <div className='flex space-x-5'>
-
+                <Link href='/user/login'>
                     <Button name='Log in' bgColor='bg-blue-500' hover='hover:bg-blue-400' textColor='text-white' otherStyles='px-7 py-3'></Button>
+                </Link>
+                <Link href='/user/signup'>
                     <Button name='Sign Up' bgColor='bg-slate-200' hover='hover:bg-slate-300' textColor='black' otherStyles='px-7 py-3'></Button>
+                </Link>
                 </div>
             </div>
         </div>
