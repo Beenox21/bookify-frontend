@@ -10,6 +10,7 @@ import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import { useToast } from '@/components/ui/use-toast'
 import Link from 'next/link'
+import { useUser } from '@/AuthContext/authContext'
 
 const formSchema = z.object({
   username: z.string().min(1, "Name field cannot be empty."),
@@ -17,6 +18,7 @@ const formSchema = z.object({
 })
 
 function Login() {
+  const { login } : any = useUser() 
   const router = useRouter()
   const {toast} = useToast()
   const form = useForm<z.infer<typeof formSchema>>({
@@ -29,14 +31,14 @@ function Login() {
 
   const handleSubmit = async (data: z.infer<typeof formSchema>) => {
     try {
-      console.log(data)
       const response = await axios.post('http://localhost:5000/api/v1/user/login', data)
       toast({
         variant: 'success',
         title: 'Login successfull.',
         description: 'Redirecting to home page.'
       })
-      console.log(response.data)
+      console.log(response.data.user)
+      login(response.data.user)
       setTimeout(() => {
         router.push('/home')
       }, 3000)
@@ -45,7 +47,7 @@ function Login() {
       toast({
         variant: 'destructive',
         title: 'Error',
-        description: error?.response?.data?.message
+        description: error?.response?.data?.message || 'Login error. Please try again later.'
       })
     }
   }

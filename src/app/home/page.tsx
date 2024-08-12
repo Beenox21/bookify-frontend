@@ -1,8 +1,16 @@
-import React from 'react'
+'use client'
+import React, { useEffect } from 'react'
 import Navbar from '@/components/navbar'
 import Button from '@/components/button'
+import { useUser } from '@/AuthContext/authContext'
 
 function HomePage() {
+    const { user }: any = useUser()
+
+    useEffect(() => {
+        console.log(user)
+    }, [user])
+    if (user) console.log(user)
     return (
         <div className='mb-20'>
             <nav>
@@ -37,7 +45,7 @@ function HomePage() {
                 <div className='flex flex-col'>
                     <img src='https://res.cloudinary.com/dgdybttbc/image/upload/v1723100742/Depth_8_Frame_0_3_yzcj91.jpg' className=' '></img>
                     <h1 className='mt-3 font-semibold'>
-                     Transcribe YouTube Audio   
+                        Transcribe YouTube Audio
                     </h1>
                     <p className='text-sm'>
                         Turn your favourite youtube videos into summaries and audio files.
@@ -46,7 +54,7 @@ function HomePage() {
                 <div className='flex flex-col'>
                     <img src='https://res.cloudinary.com/dgdybttbc/image/upload/v1723100742/Depth_8_Frame_0_vafsil.jpg' className=' '></img>
                     <h1 className='mt-3 font-semibold'>
-                     Transcribe YouTube Audio   
+                        Transcribe YouTube Audio
                     </h1>
                     <p className='text-sm'>
                         Turn your favourite youtube videos into summaries and audio files.
@@ -55,7 +63,7 @@ function HomePage() {
                 <div className='flex flex-col'>
                     <img src='https://res.cloudinary.com/dgdybttbc/image/upload/v1723100742/Depth_8_Frame_0_1_tdl8k2.jpg' className=' '></img>
                     <h1 className='mt-3 font-semibold'>
-                     Transcribe YouTube Audio   
+                        Transcribe YouTube Audio
                     </h1>
                     <p className='text-sm'>
                         Turn your favourite youtube videos into summaries and audio files.
