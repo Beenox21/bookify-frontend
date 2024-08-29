@@ -1,20 +1,35 @@
 'use client'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from '@/components/navbar'
 import Button from '@/components/button'
 import { useUser } from '@/AuthContext/authContext'
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 
 function HomePage() {
     const { user }: any = useUser()
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
-        console.log(user)
+        if (user) {
+            setIsLoading(false)
+        }
     }, [user])
-    if (user) console.log(user)
+
+    if (isLoading) {
+        return (
+            <div className='flex w-100 h-[100vh] justify-center items-center'>
+                <Box sx={{ display: 'flex' }}>
+                    <CircularProgress />
+                </Box>
+            </div>
+        )
+    }
+
     return (
         <div className='mb-20'>
             <nav>
-                <Navbar></Navbar>
+                <Navbar user={user}></Navbar>
             </nav>
 
 
@@ -43,7 +58,7 @@ function HomePage() {
 
             <div className='max-w-5xl mt-10 mx-auto grid grid-cols-3 gap-10 justify-between'>
                 <div className='flex flex-col'>
-                    <img src='https://res.cloudinary.com/dgdybttbc/image/upload/v1723100742/Depth_8_Frame_0_3_yzcj91.jpg' className=' '></img>
+                    <img src='https://res.cloudinary.com/dgdybttbc/image/upload/v1723100742/bookify/Depth_8_Frame_0_3_yzcj91.jpg' className=' '></img>
                     <h1 className='mt-3 font-semibold'>
                         Transcribe YouTube Audio
                     </h1>
@@ -52,7 +67,7 @@ function HomePage() {
                     </p>
                 </div>
                 <div className='flex flex-col'>
-                    <img src='https://res.cloudinary.com/dgdybttbc/image/upload/v1723100742/Depth_8_Frame_0_vafsil.jpg' className=' '></img>
+                    <img src='https://res.cloudinary.com/dgdybttbc/image/upload/v1723100742/bookify/Depth_8_Frame_0_vafsil.jpg' className=' '></img>
                     <h1 className='mt-3 font-semibold'>
                         Transcribe YouTube Audio
                     </h1>
@@ -61,7 +76,7 @@ function HomePage() {
                     </p>
                 </div>
                 <div className='flex flex-col'>
-                    <img src='https://res.cloudinary.com/dgdybttbc/image/upload/v1723100742/Depth_8_Frame_0_1_tdl8k2.jpg' className=' '></img>
+                    <img src='https://res.cloudinary.com/dgdybttbc/image/upload/v1723100742/bookify/Depth_8_Frame_0_1_tdl8k2.jpg' className=' '></img>
                     <h1 className='mt-3 font-semibold'>
                         Transcribe YouTube Audio
                     </h1>

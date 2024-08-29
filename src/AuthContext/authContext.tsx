@@ -1,22 +1,40 @@
 'use client'
-import { createContext,useState, useContext, ReactNode } from "react";
+import { createContext, useState, useContext,useEffect } from "react";
 
 const UserContext = createContext({});
 
-export const UserProvider = ({children} : any) => {
-    const [user, setUser] = useState(null)
+export const UserProvider = ({ children }: any) => {
 
-    const login = (userData : any) => {
-        setUser(userData)
-        console.log('User login saved')
+
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        async function func(){
+             const storedUser = localStorage.getItem('user');
+            if (storedUser) {
+              setUser(JSON.parse(storedUser));
+            }
+
+        }
+
+        func()
+    }, []) 
+
+
+    const login = async (userData: any) => {
+        setUser(userData);
+        localStorage.setItem('user', JSON.stringify(userData));
+        console.log('User login saved');
     }
 
     const logout = () => {
-        setUser(null)
+        setUser(null);
+        localStorage.removeItem('user');
     }
 
+
     return (
-        <UserContext.Provider value={{user, login, logout}} >
+        <UserContext.Provider value={{ user, login, logout }} >
             {children}
         </UserContext.Provider>
     )

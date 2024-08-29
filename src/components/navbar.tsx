@@ -4,16 +4,13 @@ import Button from './button'
 import Link from 'next/link'
 import { useUser } from '@/AuthContext/authContext'
 
-function Navbar() {
-    const { user }: any = useUser()
-    const [loginUser, setLoginUser] = useState({})
-    useEffect(() => {
-        setLoginUser(user)
-    }, [user])
+async function Navbar({user} : any) {
+    
+
     return (
         <div className='flex items-center justify-between px-16 py-3 shadow-md    border-b-2 border-slate-200'>
             <div className='flex space-x-1'>
-                <img src='https://res.cloudinary.com/dgdybttbc/image/upload/v1723060465/Screenshot_2024-08-08_011532_y4pe2e.png' className='h-7 w-auto'></img>
+                <img src='https://res.cloudinary.com/dgdybttbc/image/upload/v1723060465/bookify/Screenshot_2024-08-08_011532_y4pe2e.png' className='h-7 w-auto'></img>
                 <h1 className='text-2xl font-bold'>Bookify</h1>
             </div>
             <div className='flex items-center '>
