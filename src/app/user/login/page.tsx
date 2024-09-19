@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useEffect } from 'react'
 import * as z from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -7,7 +7,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '@/components/ui/input'
 import Button from '@/components/button'
 import axios from 'axios'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useToast } from '@/components/ui/use-toast'
 import Link from 'next/link'
 import { useUser } from '@/AuthContext/authContext'
@@ -18,9 +18,15 @@ const formSchema = z.object({
 })
 
 function Login() {
-  const { login } : any = useUser() 
+  const { login, user }: any = useUser()
   const router = useRouter()
-  const {toast} = useToast()
+  const { toast } = useToast()
+ 
+  useEffect(() => {
+    if(user)
+      router.push('/')
+  }, [user])
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -38,7 +44,7 @@ function Login() {
         description: 'Redirecting to home page.'
       })
       console.log(response.data.user)
-      login(response.data.user)
+      login(response.data.user) // setting the user as global context
       setTimeout(() => {
         router.push('/home')
       }, 3000)
@@ -98,16 +104,16 @@ function Login() {
                     </FormItem>
                   }}
                 />
-                
+
                 <h1 className='text-slate-500 cursor-pointer hover:text-blue-500 text-right text-sm mt-1'>Forgot password?</h1>
                 <Button name='Log in' bgColor='bg-blue-500' textColor='text-white' otherStyles='text-center w-full py-2 mt-10' hover='hover:bg-blue-400'></Button>
 
               </form>
             </Form>
-                <h1 className='text-slate-500 cursor-pointer hover:text-blue-500 text-center text-sm mt-1'>New to bookify?</h1>
-                <Link href='/user/signup'>
-                  <Button name='Sign Up' bgColor='bg-slate-200' textColor='text-black' otherStyles='text-center py-2 mt-4 w-full' hover='hover:bg-slate-300'></Button>
-                </Link>
+            <h1 className='text-slate-500 cursor-pointer hover:text-blue-500 text-center text-sm mt-1'>New to bookify?</h1>
+            <Link href='/user/signup'>
+              <Button name='Sign Up' bgColor='bg-slate-200' textColor='text-black' otherStyles='text-center py-2 mt-4 w-full' hover='hover:bg-slate-300'></Button>
+            </Link>
           </div>
         </div>
       </div>

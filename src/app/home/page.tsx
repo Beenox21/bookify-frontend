@@ -5,15 +5,20 @@ import Button from '@/components/button'
 import { useUser } from '@/AuthContext/authContext'
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
+import { useRouter } from 'next/navigation'
+
 
 function HomePage() {
     const { user }: any = useUser()
     const [isLoading, setIsLoading] = useState(true)
+    const router = useRouter()
+    console.log("from home", user)
 
     useEffect(() => {
-        if (user) {
+        if (user)
             setIsLoading(false)
-        }
+        else 
+        router.push("/user/login")
     }, [user])
 
     if (isLoading) {

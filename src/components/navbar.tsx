@@ -17,7 +17,9 @@ async function Navbar({user} : any) {
 
                 <div className='flex w-[22vw] justify-around mr-4'>
                     <h1 className='hover:font-semibold cursor-pointer transition-all w-1/4 text-center'>Home</h1>
+                    <Link href={'/services'}>
                     <h1 className='hover:font-semibold cursor-pointer transition-all w-1/4 text-center'>Services</h1>
+                    </Link>
                     <h1 className='hover:font-semibold cursor-pointer transition-all w-1/4 text-center'>Pricing</h1>
                     <h1 className='hover:font-semibold cursor-pointer transition-all w-12 text-center'>Blog</h1>
                 </div>

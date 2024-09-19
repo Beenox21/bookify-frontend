@@ -9,6 +9,7 @@ export const UserProvider = ({ children }: any) => {
     const [user, setUser] = useState(null);
 
     useEffect(() => {
+        console.log("Inside use effect")
         async function func(){
              const storedUser = localStorage.getItem('user');
             if (storedUser) {
@@ -16,7 +17,6 @@ export const UserProvider = ({ children }: any) => {
             }
 
         }
-
         func()
     }, []) 
 
