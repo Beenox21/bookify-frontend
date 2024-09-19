@@ -9,13 +9,13 @@ export const UserProvider = ({ children }: any) => {
     const [user, setUser] = useState(null);
 
     useEffect(() => {
-        console.log("Inside use effect")
+        console.log("Inside use effect in auth Context")
         async function func(){
              const storedUser = localStorage.getItem('user');
             if (storedUser) {
               setUser(JSON.parse(storedUser));
             }
-
+            console.log("Stored User : ", storedUser)
         }
         func()
     }, []) 

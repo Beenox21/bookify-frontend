@@ -14,13 +14,6 @@ function HomePage() {
     const router = useRouter()
     console.log("from home", user)
 
-    useEffect(() => {
-        if (user)
-            setIsLoading(false)
-        else 
-        router.push("/user/login")
-    }, [user])
-
     if (isLoading) {
         return (
             <div className='flex w-100 h-[100vh] justify-center items-center'>

@@ -21,11 +21,7 @@ function Login() {
   const { login, user }: any = useUser()
   const router = useRouter()
   const { toast } = useToast()
- 
-  useEffect(() => {
-    if(user)
-      router.push('/')
-  }, [user])
+  
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
